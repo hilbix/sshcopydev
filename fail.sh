@@ -13,5 +13,7 @@ robot/rescue.sh && exit
 
 # Nope, enter shell, leave it to the admin
 echo
+echo "### Copy interrupted.  Please fix problem, then exit this shell"
+echo
 date
 exec bash

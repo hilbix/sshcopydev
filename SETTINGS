@@ -8,8 +8,8 @@
 # Be sure that the device names never mix, so the FETCH1/FETCH2 never refer to the wrong drive!
 # If you have more complex names than "sda" like "disk/by-id/xxxx" then be sure to edit the other variables as well
 
-export FETCH1="sda"
-export FETCH2="ada0"
+export FETCH1="sda"	# Linux
+export FETCH2="ada0"	# BSD
 export HOST='broken.example.com'
 
 export DEV1="/dev/$FETCH1"
