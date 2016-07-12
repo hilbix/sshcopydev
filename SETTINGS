@@ -1,0 +1,23 @@
+# Edit this.  Then source it with
+#	source ./SETTINGS
+# Then run the rest
+#
+# HOST is the hostname to recover from.  `sftp root@HOST` must work
+# FETCH1 is the device name under `/dev/` without `/dev/`
+# FETCH2 is an altername device name (in case your rescue boot names the devices differently).  It can be the same as `FETCH`
+# Be sure that the device names never mix, so the FETCH1/FETCH2 never refer to the wrong drive!
+# If you have more complex names than "sda" like "disk/by-id/xxxx" then be sure to edit the other variables as well
+
+export FETCH1="sda"
+export FETCH2="ada0"
+export HOST='broken.example.com'
+
+export DEV1="/dev/$FETCH1"
+export DEV2="/dev/$FETCH2"
+export IMAGE="${FETCH1##*/}"
+
+case "$HOST" in
+*.example.com)	echo "Please edit SETTINGS before using it!"; read -t 60; false;;
+*)		:;
+esac
+
