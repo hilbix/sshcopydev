@@ -6,7 +6,7 @@
 # Try to resolve things automatically, if you are not able to do so, drop in a shell
 
 # Check if machine available, then just retry
-ssh -o BatchMode=yes -o KbdInteractiveAuthentication=no -o PasswordAuthentication=no -o StrictHostKeyChecking=no -o ConnectTimeout=10 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 "$HOST" true && exit
+ssh -o BatchMode=yes -o KbdInteractiveAuthentication=no -o PasswordAuthentication=no -o StrictHostKeyChecking=no -o ConnectTimeout=10 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 "root@$HOST" true && exit
 
 # Reset the remote mache with some obsuce procedure
 robot/rescue.sh && exit
