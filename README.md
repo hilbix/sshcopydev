@@ -87,8 +87,17 @@ Call it like this:
 
 If you leave away the `name-you-want` it is called `brokendrive`.
 
+This step does not do anything.  It just prints out the neccessary commands you need to do to `stdout`.  If you are happy with this you can do (as `root`):
+
+```
+./dmsetup.sh name-you-want | bash
+```
+
+Do not forget to source `. SETTINGS` if you switched to root using `sudo` or similar.
+
 > Note about Ubunut:
 > 
 > Ubuntu has `loop` compiled in the kernel.  Hence you cannot change parameters of the loop devices while running.  This is very sad and very bad.
 > To change the loop devices properly (partitions!) you need a kernel boot parameter like `loop.max_part=16` in `GRUB_CMDLINE_LINUX_DEFAULT` in file `/etc/default/grub`
 > (then `update-grub` and `reboot`).
+
