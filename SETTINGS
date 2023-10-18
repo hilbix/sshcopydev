@@ -11,10 +11,13 @@
 export FETCH1="sda"	# Linux
 export FETCH2="ada0"	# BSD
 export HOST='broken.example.com'
+export KEYFILE=../id_rsa
 
 export DEV1="/dev/$FETCH1"
 export DEV2="/dev/$FETCH2"
-export IMAGE="${FETCH1##*/}"
+export IMAGE="$HOST-${FETCH1##*/}"
+
+[ -s SETTINGS.LOCAL ] && . SETTINGS_LOCAL
 
 case "$HOST" in
 *.example.com)	echo "Please edit SETTINGS before using it!"; read -t 60; false;;
