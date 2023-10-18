@@ -40,8 +40,13 @@ Other things to mention:
 Assumptions:
 
 - `HOST` is the broken system
+  - It must be given as full hostname or IP
+  - `~/.ssh/config` does not work here
+- `KEYFILE` must be some `ssh` keyfile.
+  - Older `paramiko` needs `-----BEGIN RSA PRIVATE KEY-----`, it does not grok `OPENSSH` there
+  - Use `./test.py` to test that all `SETTINGS` are ok
 - You know the device which needs to be recovered, and the device name is unique (it may have more than one name in case you boot different systems, but both names must be unique)
-- `sftp root@HOST` works, so `ssh` is set up properly
+- `sftp root@HOST` works, so `ssh` is set up properly on the remote
 - `python` with `python-paramiko` is available locally (`apt-get install python python-paramiko`)
 - Current directory has a lot of space to take up all the image of the remote drive you want to copy
 - Your local system probably is Linux (sorry, no solution for Windows)
