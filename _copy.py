@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-#
-# Try python2.7
+#!/usr/bin/env python3
 
 PREFETCH  = 0x100000
 TIMEOUT_CONN = 10
@@ -12,17 +10,20 @@ import time
 import socket
 import paramiko
 
+#print("NOPE"); os.exit(-1)
+
 
 # Variables, see file SETTINGS
 try:
 	HOST    = os.environ['HOST']
+	KEY     = os.environ['KEYFILE']	# be sure it starts with "-----BEGIN RSA PRIVATE KEY-----" not "OPENSSH"!
 	FETCH1  = os.environ['FETCH1']
 	FETCH2  = os.environ['FETCH2']
 	DEV1    = os.environ['DEV1']
 	DEV2    = os.environ['DEV2']
 	IMAGE   = os.environ['IMAGE']
 except:
-	print "Please source SETTINGS first"
+	print("Please source SETTINGS first")
 	sys.exit(1)
 
 bs  = paramiko.SFTPFile.MAX_REQUEST_SIZE
@@ -40,8 +41,8 @@ ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 def dumpvar(c):
-	print '#', repr(c), c.__class__.__module__, c.__class__.__name__
-	print ', '.join("%s:'%s'" % (att, getattr(c,att)) for att in dir(c) if not callable(getattr(c,att)) and not att.startswith('__'))
+	print('#', repr(c), c.__class__.__module__, c.__class__.__name__)
+	print(', '.join("%s:'%s'" % (att, getattr(c,att)) for att in dir(c) if not callable(getattr(c,att)) and not att.startswith('__')))
 
 def note(c):
 	sys.stdout.write(c)
@@ -74,8 +75,8 @@ def setup():
 
 	try:
 		note('c')
-		ssh.connect(HOST, username='root', compress=False, timeout=TIMEOUT_CONN)
-	
+		ssh.connect(HOST, username='root', compress=True, look_for_keys=False, key_filename=KEY, timeout=TIMEOUT_CONN)
+
 		note('f')
 		ftp = ssh.open_sftp()
 		ftp.get_channel().settimeout(TIMEOUT_READ)
@@ -108,7 +109,7 @@ out.seek(0,2)
 off = out.tell()
 off &= ~0xfff
 
-print "starting at %5f GB %x" % ( float(off)/0x40000000, off )
+print("starting at %5f GB %x" % ( float(off)/0x40000000, off ))
 
 total = 0
 speed = 0
@@ -173,7 +174,7 @@ while True:
 			off += bs
 			continue
 
-		print "unknown exception:"
+		print("unknown exception:")
 		dumpvar(e)
 		teardown()
 		os.system('bash')
