@@ -13,7 +13,7 @@ export FETCH2="ada0"	# BSD
 export HOST='broken.example.com'
 export KEYFILE=../id_rsa
 
-[ -s SETTINGS.LOCAL ] && . SETTINGS_LOCAL
+[ -s SETTINGS.LOCAL ] && . SETTINGS.LOCAL
 
 export DEV1="/dev/$FETCH1"
 export DEV2="/dev/$FETCH2"
